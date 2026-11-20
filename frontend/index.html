@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="La Lucha Sanguchería Criolla — Carta digital interactiva con asistente de IA gastronómico y pedidos directos por WhatsApp.">
+    <meta name="theme-color" content="#3E2010">
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="La Lucha Sanguchería Criolla — Carta Digital Inteligente">
+    <meta property="og:description" content="Pide tu sánguche criollo artesanal favorito de forma rápida y directa por WhatsApp con asistencia de Inteligencia Artificial.">
+    <meta property="og:image" content="img/Sandwiches.png">
+
+    <title>La Lucha Sanguchería Criolla — Carta Digital Inteligente</title>
+
+    <!-- Tipografía Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Hojas de Estilos -->
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <!-- ==============================================================
+         CONTENEDOR PRINCIPAL FLIPBOOK (REVISTA DIGITAL)
+         ============================================================== -->
+    <main class="revista-viewport" id="revista-viewport" role="main">
+        <div class="revista-track" id="revista-track">
+
+            <!-- PÁGINA 1: PORTADA -->
+            <section class="pagina pagina-1" id="pagina-0" data-pagina="0" aria-label="Portada del Menú">
+                <div class="portada-fondo-deco">
+                    <div class="deco-circulo deco-circulo-1"></div>
+                    <div class="deco-circulo deco-circulo-2"></div>
+                    <div class="deco-lineas"></div>
+                </div>
+
+                <div class="portada-contenido">
+                    <div class="portada-badge">
+                        <span>🇵🇪 Carta Digital Interactiva</span>
+                    </div>
+
+                    <div class="portada-llama-deco" aria-hidden="true">🦙</div>
+
+                    <header class="portada-marca-wrap">
+                        <div class="portada-marca-eyebrow">🇵🇪 Desde el corazón del Perú</div>
+                        <h1 class="portada-marca-titulo">
+                            <span class="portada-marca-la">La Lucha</span>
+                            <span class="portada-marca-sangucheria">Sanguchería</span>
+                            <span class="portada-marca-criolla">Criolla</span>
+                        </h1>
+                        <div class="portada-marca-divider"></div>
+                        <p class="portada-subtitulo">Tradición criolla en cada bocado</p>
+                    </header>
+
+                    <div class="portada-mesa-badge" id="portada-mesa-badge">
+                        <span>📍 Mesa: <strong id="portada-mesa-num">—</strong></span>
+                    </div>
+
+                    <div class="portada-cta-wrap">
+                        <button class="portada-cta-btn" id="btn-empezar" onclick="gestorApp.irAPagina(1)">
+                            <span class="cta-texto">Ver la Carta</span>
+                            <span class="cta-icono" aria-hidden="true">➔</span>
+                        </button>
+                        <p class="portada-hint">Desliza o haz clic para explorar</p>
+                    </div>
+
+                    <div class="portada-ondas" aria-hidden="true">
+                        <svg viewBox="0 0 390 60" preserveAspectRatio="none">
+                            <path d="M0,30 C80,60 160,0 240,30 C320,60 360,15 390,30 L390,60 L0,60 Z" fill="rgba(78,52,46,0.08)"/>
+                            <path d="M0,40 C70,10 150,60 250,35 C330,15 370,45 390,40 L390,60 L0,60 Z" fill="rgba(78,52,46,0.05)"/>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PÁGINA 2: SÁNGUCHES Y BUSCADOR POR ANTOJO (IA) -->
+            <section class="pagina pagina-2" id="pagina-1" data-pagina="1" aria-label="Catálogo de Sánguches">
+                <div class="pagina-header pagina-header-sanguch">
+                    <div class="pagina-header-img-wrap">
+                        <img src="img/Sandwiches.png" alt="Sánguches Criollos Artesanales" class="pagina-header-img" loading="lazy">
+                        <div class="pagina-header-overlay">
+                            <div class="pagina-numero">Pág. 2</div>
+                            <h2 class="pagina-titulo-seccion">🥖 Sánguches Criollos</h2>
+                            <p class="pagina-subtitulo-seccion">Tradición en cada bocado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buscador de Antojos con IA -->
+                <div class="antojo-barra-wrap">
+                    <div class="antojo-barra-inner">
+                        <span class="antojo-icono" aria-hidden="true">🦙</span>
+                        <input
+                            type="text"
+                            id="antojo-input"
+                            class="antojo-input"
+                            placeholder="Dile a la IA qué se te antoja hoy..."
+                            oninput="gestorApp.filtrarPorAntojo(this.value)"
+                            onkeydown="if(event.key === 'Enter') gestorApp.buscarAntojoInmediato()"
+                            autocomplete="off"
+                            spellcheck="false"
+                            maxlength="100"
+                            aria-label="Buscar producto o antojo con IA"
+                        >
+                        <button class="antojo-clear-btn" id="antojo-clear" onclick="gestorApp.limpiarFiltroAntojo()" aria-label="Limpiar búsqueda">✕</button>
+                        <button class="antojo-enviar-btn" id="antojo-enviar" onclick="gestorApp.buscarAntojoInmediato()" aria-label="Buscar antojo">➔</button>
+                    </div>
+                    <div class="antojo-mensaje-ia" id="antojo-mensaje-ia" style="display: none;" role="status"></div>
+                    
+                    <div class="antojo-sugerencias-wrap">
+                        <span class="sugerencias-titulo">💡 Sé específico con tu antojo y la IA lo marcará por ti:</span>
+                    </div>
+                </div>
+
+                <!-- Contenedor dinámico de sánguches -->
+                <div class="pagina-cuerpo" id="lista-sanguchos">
+                    <div class="cargando-placeholder">
+                        <div class="spinner"></div>
+                        <p>Cargando carta...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PÁGINA 3: BEBIDAS -->
+            <section class="pagina pagina-3" id="pagina-2" data-pagina="2" aria-label="Catálogo de Bebidas">
+                <div class="pagina-header pagina-header-bebidas">
+                    <div class="pagina-header-img-wrap">
+                        <div class="pagina-header-overlay pagina-header-overlay-bebidas">
+                            <div class="pagina-numero">Pág. 3</div>
+                            <h2 class="pagina-titulo-seccion">🥤 Bebidas</h2>
+                            <p class="pagina-subtitulo-seccion">Frías y calientes para acompañar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenedor dinámico de bebidas -->
+                <div class="pagina-cuerpo pagina-cuerpo-bebidas" id="lista-bebidas">
+                    <div class="cargando-placeholder">
+                        <div class="spinner"></div>
+                        <p>Cargando bebidas...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PÁGINA 4: CARRITO Y ENVÍO A WHATSAPP -->
+            <section class="pagina pagina-4" id="pagina-3" data-pagina="3" aria-label="Resumen del Pedido">
+                <header class="carrito-header">
+                    <div class="carrito-header-deco"></div>
+                    <span class="carrito-header-llama" aria-hidden="true">🦙</span>
+                    <h2 class="carrito-titulo">Tu Pedido</h2>
+                    <p class="carrito-subtitulo" id="carrito-mesa-label">Mesa: —</p>
+                </header>
+
+                <div class="carrito-cuerpo" id="carrito-cuerpo">
+                    <div class="carrito-vacio" id="carrito-vacio">
+                        <div class="carrito-vacio-icono" aria-hidden="true">🛒</div>
+                        <p>Tu carrito está vacío</p>
+                        <button class="btn-ir-carta" onclick="gestorApp.irAPagina(1)">Ver la Carta ➔</button>
+                    </div>
+                </div>
+
+                <footer class="carrito-footer" id="carrito-footer">
+                    <div class="carrito-total-row">
+                        <span class="carrito-total-label">Total a Pagar</span>
+                        <span class="carrito-total-monto" id="monto-total-ui">S/ 0.00</span>
+                    </div>
+
+                    <!-- Widget de Tiempo Estimado de Preparación -->
+                    <div class="tiempo-estimado-wrap" id="tiempo-estimado-wrap">
+                        <div class="tiempo-estimado-inner">
+                            <div class="tiempo-icono-wrap">
+                                <span class="tiempo-icono" aria-hidden="true">⏱️</span>
+                            </div>
+                            <div class="tiempo-texto-wrap">
+                                <span class="tiempo-label">Tiempo estimado de preparación</span>
+                                <span class="tiempo-valor" id="tiempo-valor">— min</span>
+                            </div>
+                            <div class="tiempo-barra-wrap" aria-hidden="true">
+                                <div class="tiempo-barra" id="tiempo-barra"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de Confirmación por WhatsApp -->
+                    <button class="btn-whatsapp-grande" id="btn-whatsapp-grande" onclick="gestorApp.procesarConfirmacion()">
+                        <svg viewBox="0 0 24 24" class="wa-icono-svg" aria-hidden="true">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        <span>Confirmar Pedido por WhatsApp</span>
+                    </button>
+                </footer>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- BARRA INFERIOR DE NAVEGACIÓN -->
+    <nav class="revista-nav" id="revista-nav" aria-label="Navegación de páginas">
+        <button class="nav-flecha nav-flecha-izq" id="nav-prev" onclick="gestorApp.irAPagina(gestorApp.paginaActual - 1)" aria-label="Página anterior">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="nav-dots" id="nav-dots">
+            <button class="nav-dot activo" id="dot-0" onclick="gestorApp.irAPagina(0)" aria-label="Ir a Portada"></button>
+            <button class="nav-dot" id="dot-1" onclick="gestorApp.irAPagina(1)" aria-label="Ir a Sánguches"></button>
+            <button class="nav-dot" id="dot-2" onclick="gestorApp.irAPagina(2)" aria-label="Ir a Bebidas"></button>
+            <button class="nav-dot" id="dot-3" onclick="gestorApp.irAPagina(3)" aria-label="Ir a Mi Pedido"></button>
+        </div>
+
+        <div class="nav-labels" id="nav-labels">
+            <span class="nav-label activo" data-pagina="0">Portada</span>
+            <span class="nav-label" data-pagina="1">Sánguches</span>
+            <span class="nav-label" data-pagina="2">Bebidas</span>
+            <span class="nav-label" data-pagina="3">Mi Pedido</span>
+        </div>
+
+        <button class="nav-flecha nav-flecha-der" id="nav-next" onclick="gestorApp.irAPagina(gestorApp.paginaActual + 1)" aria-label="Siguiente página">
+            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </nav>
+
+    <!-- BOTÓN FLOTANTE MINI CARRITO -->
+    <aside class="mini-carrito-flotante" id="mini-carrito-flotante" aria-label="Acceso rápido al carrito">
+        <button class="mini-carrito-btn" onclick="gestorApp.irAPagina(3)" id="mini-carrito-btn" aria-label="Ver carrito">
+            <span class="mini-carrito-icono" aria-hidden="true">🛒</span>
+            <span class="mini-carrito-badge" id="mini-carrito-badge">0</span>
+            <span class="mini-carrito-monto" id="mini-carrito-monto">S/ 0.00</span>
+        </button>
+    </aside>
+
+    <!-- SCRIPTS MODULARES -->
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
